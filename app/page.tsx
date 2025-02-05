@@ -7,7 +7,7 @@ export default async function Home() {
   console.log(session!);
 
   return (
-    <div>
+    <div className="flex h-screen mt-24">
       <h1 className="text-3xl font-bold">Nextflix</h1>
     </div>
   );

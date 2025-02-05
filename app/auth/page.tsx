@@ -1,6 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import Input from "@/app/components/input";
+import Input from "@/components/input";
 // import Image from "next/image";
 import { ChangeEvent, useCallback, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
@@ -47,18 +47,18 @@ export default function Auth() {
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-cover bg-center bg-no-repeat">
       <div className="w-full h-full bg-black bg-opacity-50">
-        <nav className="px-12 py-5">
-          <h1 className="text-red-600 text-6xl font-extrabold">YANC</h1>
-          {/* <Image */}
-          {/*   src="/images/netflix-logo.png" */}
-          {/*   alt="netflix logo" */}
-          {/*   width={200} */}
-          {/*   height={200} */}
-          {/*   className="sm:self-center" */}
-          {/* /> */}
-        </nav>
-        <div className="flex justify-center ">
-          <div className="bg-white-0/10 bg-clip-padding backdrop-filter backdrop-blur-md p-16 self-center mt-2 lg:w-2/5 mx-auto rounded-lg shadow-lg border-white/20 border">
+        {/* <nav className="px-12 py-5"> */}
+        {/*   <h1 className="text-red-600 text-6xl font-extrabold">YANC</h1> */}
+        {/* <Image */}
+        {/*   src="/images/netflix-logo.png" */}
+        {/*   alt="netflix logo" */}
+        {/*   width={200} */}
+        {/*   height={200} */}
+        {/*   className="sm:self-center" */}
+        {/* /> */}
+        {/* </nav> */}
+        <div className="flex justify-center items-center">
+          <div className=" mt-32 bg-white-0/10 bg-clip-padding backdrop-filter backdrop-blur-md p-16 self-center lg:w-2/5 mx-auto rounded-lg shadow-lg border-white/20 border">
             <h2 className="font-semibold text-4xl mb-8 text-white">
               {isLogin ? "Sign In" : "Sign Up"}
             </h2>
