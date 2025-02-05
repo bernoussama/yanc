@@ -7,7 +7,6 @@
   "name": "nextflix",
   "compatibility_date": "2025-02-04",
   "compatibility_flags": ["nodejs_compat"],
-  "node_version": "20.0.0",
   "pages_build_output_dir": ".vercel/output/static",
   "observability": {
     "enabled": true
@@ -29,7 +28,10 @@
    * Environment Variables
    * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
    */
-  // "vars": { "MY_VARIABLE": "production_value" },
+
+"vars": {
+  "NODE_VERSION": ">=21.1.0"
+}
   /**
    * Note: Use secrets to store sensitive data.
    * https://developers.cloudflare.com/workers/configuration/secrets/
