@@ -30,6 +30,7 @@ export default function Auth() {
       console.log(e);
     }
   }, [email, name, password]);
+
   const login = useCallback(async () => {
     try {
       console.log(password);
@@ -93,7 +94,7 @@ export default function Auth() {
               />
               <button
                 onClick={isLogin ? login : register}
-                className="bg-red-600 hover:drop-shadow-glow backdrop-blur-md hover:ring-1 hover:ring-red-500 text-white font-bold py-2 px-4 rounded-md"
+                className="bg-red-600 hover:drop-shadow-glow backdrop-blur-md hover:ring-1 hover:ring-red-500 text-white font-bold py-2 px-4 rounded-md cursor-not-allowed"
               >
                 {isLogin ? "Login" : "Sign Up"}
               </button>
@@ -105,8 +106,8 @@ export default function Auth() {
                   <FcGoogle size={30} />
                 </div>
                 <div
-                  onClick={() => signIn("github", { redirectTo: "/" })}
-                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition"
+                  // onClick={() => signIn("github", { redirectTo: "/" })}
+                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center  hover:bg-white/20 transition cursor-not-allowed"
                 >
                   <FaGithub size={30} />
                 </div>
