@@ -3,8 +3,8 @@ import { auth } from "@/auth";
 export const runtime = "edge";
 
 export default async function Home() {
-  const user = await auth();
-  console.log(user!);
+  const session = await auth();
+  console.log(session!);
 
   return (
     <div>
