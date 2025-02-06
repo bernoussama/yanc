@@ -62,4 +62,5 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             DOCKER=true
+            TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
           # tags: |
