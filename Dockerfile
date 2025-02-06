@@ -31,8 +31,8 @@ RUN chmod +x ./scripts/run.sh
 
 EXPOSE 3000
 
-HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT} || exit 1
+# HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=3 \
+#   CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT} || exit 1
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/config/next-config-js/output
