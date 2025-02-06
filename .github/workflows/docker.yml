@@ -27,6 +27,9 @@ jobs:
     # needs:
     #   - run-tests
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup
         uses: pnpm/action-setup@v4
         with:
@@ -37,9 +40,6 @@ jobs:
         with:
           node-version: 23
           cache: "pnpm"
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
       - run: pnpm install
 
