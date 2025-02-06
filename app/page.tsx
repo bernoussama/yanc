@@ -94,31 +94,3 @@ function MovieSection({ title, movies }: { title: string; movies: Movie[] }) {
     </div>
   );
 }
-
-function MovieCard({ movie }: { movie: Movie }) {
-  return (
-    <Link
-      href={`/movie/${movie.id}`}
-      className="relative group w-48 h-72 rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105"
-    >
-      <div className="relative w-full h-full">
-        <Image
-          src={getImageUrl(movie.poster_path)!}
-          alt={movie.title}
-          fill
-          className="rounded-sm object-cover md:rounded"
-        />
-      </div>
-      <div className="absolute w-full h-full inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-        <div className="">
-          <h3 className="text-white font-medium">{movie.title}</h3>
-          <p className="text-sm text-white/70">
-            {new Date(movie.release_date).getFullYear()}
-            {" • "}
-            {movie.vote_average.toFixed(1)} ★
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-}
