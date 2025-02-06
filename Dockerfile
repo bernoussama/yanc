@@ -34,13 +34,8 @@ ENV DOCKER=true
 ARG TARGETARCH
 ARG TMDB_API_KEY
 ENV TMDB_API_KEY=$TMDB_API_KEY
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
 
+# COPY pnpm-lock.yaml pnpm-lock.yaml
 # Production image, copy all the files and run next
 FROM node:23.3.0-slim
 WORKDIR /app
