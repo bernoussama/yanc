@@ -42,7 +42,7 @@ RUN \
   fi
 
 # Production image, copy all the files and run next
-FROM --platform=$BUILDPLATFORM base AS runner
+FROM --platform=$BUILDPLATFORM node:23.3.0-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
