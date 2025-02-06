@@ -28,17 +28,15 @@ jobs:
     #   - run-tests
     steps:
       - name: Setup
-
-      - uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v4
         with:
           version: 9.15
           run_install: false
 
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 23
-          cache: 'pnpm'
-
+          cache: "pnpm"
 
       - name: Checkout repository
         uses: actions/checkout@v4
