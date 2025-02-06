@@ -1,9 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-ARG TMDB_API_KEY
-
-
-FROM node:22-alpine AS base
+FROM --platform=$BUILDPLATFORM node:22-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -33,6 +30,8 @@ COPY . .
 # ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_PRIVATE_STANDALONE=true
 ENV DOCKER=true
+
+ARG TMDB_API_KEY
 ENV TMDB_API_KEY=$TMDB_API_KEY
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
@@ -47,6 +46,8 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV DOCKER=true
+
+ARG TMDB_API_KEY
 ENV TMDB_API_KEY=$TMDB_API_KEY
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED=1
