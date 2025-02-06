@@ -10,6 +10,8 @@ import Image from "next/image";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Link from "next/link";
 
+export const runtime = "edge";
+
 // Generate static params for all TV show pages at build time
 export async function generateStaticParams() {
   // Fetch all TV shows that we want to pre-render

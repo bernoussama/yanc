@@ -68,7 +68,6 @@ export interface TvShowDetails extends TvShow {
 
 async function fetchFromTMDB(endpoint: string) {
   try {
-    console.log("fetching...");
     const response = await fetch(
       `${TMDB_BASE_URL}${endpoint}?api_key=${TMDB_API_KEY}&language=en-US`,
       { next: { revalidate: 3600 } },
@@ -112,8 +111,6 @@ export async function getSeasonDetails(
 }
 
 export async function getTrendingMovies(): Promise<Movie[]> {
-  console.log("getting trending movies...");
-
   const data = (await fetchFromTMDB("/trending/movie/week")) as {
     results: Movie[];
   };
