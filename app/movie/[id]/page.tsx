@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { getImageUrl, getMovieById } from "@/lib/tmdb";
+import { getMovieById } from "@/lib/tmdb";
+import { getImageUrl } from "@/lib/utils";
 import { Clock, Calendar, Star, PlayCircle } from "lucide-react";
 import Image from "next/image";
 

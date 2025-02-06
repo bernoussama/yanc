@@ -3,12 +3,8 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { PlayCircle, Info } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  getTrendingTvShows,
-  getPopularTvShows,
-  getImageUrl,
-  type TvShow,
-} from "@/lib/tmdb";
+import { getTrendingTvShows, getPopularTvShows, type TvShow } from "@/lib/tmdb";
+import { getImageUrl } from "@/lib/utils";
 import Card from "@/components/card";
 
 async function getTvShows() {

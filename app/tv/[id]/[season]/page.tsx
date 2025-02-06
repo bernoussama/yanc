@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { getImageUrl, getTvShowById, getSeasonDetails } from "@/lib/tmdb";
+import { getTvShowById, getSeasonDetails } from "@/lib/tmdb";
+
+import { getImageUrl } from "@/lib/utils";
 import { Calendar, Clock, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

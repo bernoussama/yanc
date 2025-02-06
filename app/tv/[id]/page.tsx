@@ -1,4 +1,5 @@
-import { getImageUrl, getTvShowById } from "@/lib/tmdb";
+import { getTvShowById } from "@/lib/tmdb";
+import { getImageUrl } from "@/lib/utils";
 import { Calendar, Star, Tv } from "lucide-react";
 import WatchNowButton from "@/components/WatchNowButton";
 import Image from "next/image";

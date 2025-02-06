@@ -1,6 +1,6 @@
+"use server";
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
-const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
 export interface Movie {
   id: number;
@@ -66,12 +66,21 @@ export interface TvShowDetails extends TvShow {
   seasons: Season[];
 }
 
-async function fetchFromTMDB(endpoint: string) {
+async function fetchFromTMDB<T>(
+  endpoint: string,
+  queryParams: Record<string, string> = {},
+): Promise<T> {
   try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}${endpoint}?api_key=${TMDB_API_KEY}&language=en-US`,
-      { next: { revalidate: 3600 } },
-    );
+    const params = new URLSearchParams({
+      api_key: TMDB_API_KEY!,
+      language: "en-US",
+      ...queryParams,
+    });
+
+    const response = await fetch(`${TMDB_BASE_URL}${endpoint}?${params}`, {
+      next: { revalidate: 3600 },
+    });
+    console.log(response.status);
 
     if (!response.ok) {
       throw new Error(`TMDB API error: ${response.status}`);
@@ -84,21 +93,13 @@ async function fetchFromTMDB(endpoint: string) {
   }
 }
 
-export function getImageUrl(
-  path: string | null,
-  size: "w500" | "original" = "w500",
-) {
-  if (!path) return null;
-  return `${TMDB_IMAGE_BASE_URL}/${size}${path}`;
-}
-
 export async function getMovieById(id: string): Promise<MovieDetails> {
-  const data = await fetchFromTMDB(`/movie/${id}`);
+  const data = await fetchFromTMDB<MovieDetails>(`/movie/${id}`);
   return data as MovieDetails;
 }
 
 export async function getTvShowById(id: string): Promise<TvShowDetails> {
-  const data = await fetchFromTMDB(`/tv/${id}`);
+  const data = await fetchFromTMDB<TvShowDetails>(`/tv/${id}`);
   return data as TvShowDetails;
 }
 
@@ -106,48 +107,76 @@ export async function getSeasonDetails(
   showId: string,
   seasonNumber: string,
 ): Promise<SeasonDetails> {
-  const data = await fetchFromTMDB(`/tv/${showId}/season/${seasonNumber}`);
+  const data = await fetchFromTMDB<SeasonDetails>(
+    `/tv/${showId}/season/${seasonNumber}`,
+  );
   return data as SeasonDetails;
 }
 
 export async function getTrendingMovies(): Promise<Movie[]> {
-  const data = (await fetchFromTMDB("/trending/movie/week")) as {
-    results: Movie[];
-  };
-  return data.results;
+  console.log("getting trending movies...");
+
+  const data = await fetchFromTMDB<{ results: Movie[] }>(
+    "/trending/movie/week",
+  );
+  return data.results as Movie[];
 }
 
 export async function getPopularMovies(): Promise<Movie[]> {
-  const data = (await fetchFromTMDB("/movie/popular")) as {
-    results: Movie[];
-  };
-  return data.results;
+  const data = await fetchFromTMDB<{ results: Movie[] }>("/movie/popular");
+  return data.results as Movie[];
 }
 
 export async function getTopRatedMovies(): Promise<Movie[]> {
-  const data = (await fetchFromTMDB("/movie/top_rated")) as {
-    results: Movie[];
-  };
-  return data.results;
+  const data = await fetchFromTMDB<{ results: Movie[] }>("/movie/top_rated");
+  return data.results as Movie[];
 }
 
 export async function getUpcomingMovies(): Promise<Movie[]> {
-  const data = (await fetchFromTMDB("/movie/upcoming")) as {
-    results: Movie[];
-  };
-  return data.results;
+  const data = await fetchFromTMDB<{ results: Movie[] }>("/movie/upcoming");
+  return data.results as Movie[];
 }
 
 export async function getPopularTvShows(): Promise<TvShow[]> {
-  const data = (await fetchFromTMDB("/tv/popular")) as {
-    results: TvShow[];
-  };
-  return data.results;
+  const data = await fetchFromTMDB<{ results: TvShow[] }>("/tv/popular");
+  return data.results as TvShow[];
 }
 
 export async function getTrendingTvShows(): Promise<TvShow[]> {
-  const data = (await fetchFromTMDB("/trending/tv/week")) as {
-    results: TvShow[];
-  };
-  return data.results;
+  const data = await fetchFromTMDB<{ results: TvShow[] }>("/trending/tv/week");
+  return data.results as TvShow[];
+}
+
+export interface SearchResult {
+  id: number;
+  title?: string;
+  name?: string;
+  media_type: "movie" | "tv";
+  poster_path: string | null;
+  release_date?: string;
+  first_air_date?: string;
+  vote_average: number;
+}
+
+export interface SearchResponse {
+  page: number;
+  results: SearchResult[];
+  total_pages: number;
+  total_results: number;
+}
+
+export async function searchMulti(
+  query: string,
+  page = 1,
+): Promise<SearchResponse> {
+  try {
+    const data = await fetchFromTMDB("/search/multi", {
+      query,
+      page: page.toString(),
+      include_adult: "false",
+    });
+    return data as SearchResponse;
+  } catch {
+    return {} as SearchResponse;
+  }
 }

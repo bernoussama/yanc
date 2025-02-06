@@ -1,4 +1,5 @@
-import { getImageUrl, Movie, TvShow } from "@/lib/tmdb";
+import { Movie, TvShow } from "@/lib/tmdb";
+import { getImageUrl } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 
