@@ -1,0 +1,39 @@
+services:
+  watchtower:
+    image: "containrrr/watchtower"
+    command:
+      - "--label-enable"
+      - "--interval"
+      - "30"
+      - "--rolling-restart"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  nextflix:
+    image: ghcr.io/bernoussama/nextflix:latest
+    labels:
+      - traefik.enable=true
+      - "traefik.port=3000"
+      - "traefik.http.services.simplinvo-https.loadbalancer.server.port=3000"
+      - traefik.http.routers.simplinvo-https.tls=true
+      - traefik.http.routers.simplinvo-https.tls.certresolver=cloudflare
+      - traefik.http.routers.simplinvo-https.entrypoints=websecure
+      - traefik.http.routers.simplinvo-https.rule=HostRegexp(`nextflix.simplinvo.com`)
+      - "traefik.http.routers.simplinvo-https.tls.domains[0].main=nextflix.simplinvo.com"
+      # - "traefik.http.routers.simplinvo-https.tls.domains[0].sans=*.simplinvo.com"
+      - com.centurylinklabs.watchtower.enable=true
+    volumes:
+      - .env:/.env:ro
+    restart: unless-stopped
+    expose:
+      - "8090"
+    deploy:
+      mode: replicated
+      replicas: 2
+    networks:
+      - frontend
+
+volumes:
+  .env:
+networks:
+  frontend:
+    external: true
