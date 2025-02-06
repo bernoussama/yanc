@@ -51,12 +51,12 @@ ENV TMDB_API_KEY=$TMDB_API_KEY
 # RUN addgroup --system --gid 1001 nodejs
 # RUN adduser --system --uid 1001 nextjs
 
-COPY /app/public ./public
+COPY public ./public
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY  /app/.next/standalone ./
-COPY  /app/.next/static ./.next/static
+COPY .next/standalone ./
+COPY .next/static ./.next/static
 COPY ./scripts/run.sh ./scripts/run.sh
 RUN chmod +x ./scripts/run.sh
 # copy env file
