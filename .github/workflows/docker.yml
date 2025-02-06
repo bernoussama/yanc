@@ -61,10 +61,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=sha,format=short
-            type=ref,event=branch
-            type=ref,event=tag
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest
+            type=pep440,pattern={{version}}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -74,7 +72,6 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
-        # env: VITE_PB_API_URL=${{ secrets.API_URL }}
         with:
           context: .
           push: true
@@ -85,4 +82,5 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
+          network: host
           # tags: |
