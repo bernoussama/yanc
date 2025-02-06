@@ -1,9 +1,4 @@
-import {
-  getImageUrl,
-  getTvShowById,
-  getTrendingTvShows,
-  getPopularTvShows,
-} from "@/lib/tmdb";
+import { getImageUrl, getTvShowById } from "@/lib/tmdb";
 import { Calendar, Star, Tv } from "lucide-react";
 import WatchNowButton from "@/components/WatchNowButton";
 import Image from "next/image";
@@ -13,21 +8,21 @@ import Link from "next/link";
 export const runtime = "edge";
 
 // Generate static params for all TV show pages at build time
-export async function generateStaticParams() {
-  // Fetch all TV shows that we want to pre-render
-  const [trending, popular] = await Promise.all([
-    getTrendingTvShows(),
-    getPopularTvShows(),
-  ]);
-
-  // Combine all shows and remove duplicates
-  const allShows = [...trending, ...popular];
-  const uniqueShows = Array.from(new Set(allShows.map((show) => show.id))).map(
-    (id) => ({ id: id.toString() }),
-  );
-
-  return uniqueShows;
-}
+// export async function generateStaticParams() {
+//   // Fetch all TV shows that we want to pre-render
+//   const [trending, popular] = await Promise.all([
+//     getTrendingTvShows(),
+//     getPopularTvShows(),
+//   ]);
+//
+//   // Combine all shows and remove duplicates
+//   const allShows = [...trending, ...popular];
+//   const uniqueShows = Array.from(new Set(allShows.map((show) => show.id))).map(
+//     (id) => ({ id: id.toString() }),
+//   );
+//
+//   return uniqueShows;
+// }
 
 async function TvShowPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

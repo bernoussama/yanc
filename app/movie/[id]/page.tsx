@@ -1,34 +1,27 @@
 import { Button } from "@/components/ui/button";
-import {
-  getImageUrl,
-  getMovieById,
-  getTrendingMovies,
-  getPopularMovies,
-  getUpcomingMovies,
-  type MovieDetails,
-} from "@/lib/tmdb";
+import { getImageUrl, getMovieById } from "@/lib/tmdb";
 import { Clock, Calendar, Star, PlayCircle } from "lucide-react";
 import Image from "next/image";
 
 export const runtime = "edge";
 
 // Generate static params for all movie pages at build time
-export async function generateStaticParams() {
-  // Fetch all movies that we want to pre-render
-  const [trending, popular, upcoming] = await Promise.all([
-    getTrendingMovies(),
-    getPopularMovies(),
-    getUpcomingMovies(),
-  ]);
-
-  // Combine all movies and remove duplicates
-  const allMovies = [...trending, ...popular, ...upcoming];
-  const uniqueMovies = Array.from(
-    new Set(allMovies.map((movie) => movie.id)),
-  ).map((id) => ({ id: id.toString() }));
-
-  return uniqueMovies;
-}
+// export async function generateStaticParams() {
+//   // Fetch all movies that we want to pre-render
+//   const [trending, popular, upcoming] = await Promise.all([
+//     getTrendingMovies(),
+//     getPopularMovies(),
+//     getUpcomingMovies(),
+//   ]);
+//
+//   // Combine all movies and remove duplicates
+//   const allMovies = [...trending, ...popular, ...upcoming];
+//   const uniqueMovies = Array.from(
+//     new Set(allMovies.map((movie) => movie.id)),
+//   ).map((id) => ({ id: id.toString() }));
+//
+//   return uniqueMovies;
+// }
 
 // This becomes a static page
 async function MoviePage({ params }: { params: Promise<{ id: string }> }) {

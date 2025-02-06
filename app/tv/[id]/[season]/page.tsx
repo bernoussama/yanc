@@ -7,25 +7,25 @@ import { notFound } from "next/navigation";
 
 export const runtime = "edge";
 
-export async function generateStaticParams({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
-  try {
-    const show = await getTvShowById(id);
-    return (
-      show.seasons
-        //.filter(season => season.air_date) // Only include seasons with air dates
-        .map((season) => ({
-          seasonNumber: season.season_number.toString(),
-        }))
-    );
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-}
+// export async function generateStaticParams({
+//   params: { id },
+// }: {
+//   params: { id: string };
+// }) {
+//   try {
+//     const show = await getTvShowById(id);
+//     return (
+//       show.seasons
+//         //.filter(season => season.air_date) // Only include seasons with air dates
+//         .map((season) => ({
+//           seasonNumber: season.season_number.toString(),
+//         }))
+//     );
+//   } catch (error) {
+//     console.log(error);
+//     return [];
+//   }
+// }
 
 async function SeasonPage({
   params,
