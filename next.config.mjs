@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === "development") {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
+
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -19,5 +20,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 };
+if (process.env.DOCKER) {
+  nextConfig.output = "standalone";
+}
 
 export default nextConfig;
