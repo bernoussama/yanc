@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   getImageUrl,
   getTvShowById,
@@ -28,8 +27,9 @@ export async function generateStaticParams() {
   return uniqueShows;
 }
 
-async function TvShowPage({ params }: { params: { id: string } }) {
-  const show = await getTvShowById(params.id);
+async function TvShowPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const show = await getTvShowById(id);
 
   return (
     <main className="min-h-screen bg-background">
@@ -83,7 +83,7 @@ async function TvShowPage({ params }: { params: { id: string } }) {
       </div>
 
       <div className="container pl-24">
-        <WatchNowButton id={params.id} />
+        <WatchNowButton id={id} />
       </div>
       {/* Seasons Section */}
       <div className="container mx-auto px-8 py-12">

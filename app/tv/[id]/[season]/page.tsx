@@ -26,11 +26,12 @@ export async function generateStaticParams({
 }
 
 async function SeasonPage({
-  params: { id, season: seasonNumber },
+  params,
 }: {
-  params: { id: string; season: string };
+  params: Promise<{ id: string; season: string }>;
 }) {
   try {
+    const { id, season: seasonNumber } = await params;
     const [show, season] = await Promise.all([
       getTvShowById(id),
       getSeasonDetails(id, seasonNumber),

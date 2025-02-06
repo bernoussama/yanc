@@ -29,8 +29,9 @@ export async function generateStaticParams() {
 }
 
 // This becomes a static page
-async function MoviePage({ params }: { params: { id: string } }) {
-  const movie = await getMovieById(params.id);
+async function MoviePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const movie = await getMovieById(id);
 
   return (
     <main className="min-h-screen h-auto bg-background pb-8">
