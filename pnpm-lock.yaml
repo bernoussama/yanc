@@ -91,7 +91,7 @@ importers:
         specifier: ^5
         version: 5.7.3
       vercel:
-        specifier: ^41.0.0
+        specifier: ^41.0.2
         version: 41.0.2
       wrangler:
         specifier: ^3.107.3
