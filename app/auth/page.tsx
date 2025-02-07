@@ -14,7 +14,7 @@ export default function Auth() {
 
   const register = useCallback(async () => {
     try {
-      console.log(password);
+      console.log("Password received");
       await fetch("/api/register", {
         method: "POST",
         headers: {
@@ -33,7 +33,7 @@ export default function Auth() {
 
   const login = useCallback(async () => {
     try {
-      console.log(password);
+      console.log("Password received");
       await signIn("credentials", {
         email,
         password,
