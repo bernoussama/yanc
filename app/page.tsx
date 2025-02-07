@@ -1,6 +1,5 @@
 export const runtime = "edge";
 
-import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { PlayCircle, Info } from "lucide-react";
@@ -30,8 +29,6 @@ async function getMovies() {
 }
 
 export default async function Home() {
-  const session = await auth();
-  console.log(session!);
   const { trending, popular, upcoming } = await getMovies();
   const heroMovie = trending[0];
 
