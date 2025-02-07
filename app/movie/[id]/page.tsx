@@ -5,8 +5,6 @@ import { getImageUrl } from "@/lib/utils";
 import { Clock, Calendar, Star, PlayCircle } from "lucide-react";
 import Image from "next/image";
 
-export const runtime = "edge";
-
 // Generate static params for all movie pages at build time
 // export async function generateStaticParams() {
 //   // Fetch all movies that we want to pre-render

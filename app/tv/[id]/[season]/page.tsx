@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export const runtime = "edge";
+
 
 // export async function generateStaticParams({
 //   params: { id },
@@ -105,9 +105,9 @@ async function SeasonPage({
                   key={episode.id}
                   className="bg-card rounded-lg overflow-hidden border border-border/50"
                 >
-                  <div className="flex flex-col md:flex-row">
+                  <div className="flex flex-col md:flex-row h-[169px]">
                     {episode.still_path ? (
-                      <div className="relative w-full md:w-[300px] h-[169px]">
+                      <div className="relative min-w-[300px] max-w-[300px]  ">
                         <Image
                           src={getImageUrl(episode.still_path)!}
                           alt={episode.name}
@@ -145,7 +145,13 @@ async function SeasonPage({
                             )}
                           </div>
                         </div>
-                        <Button>Play</Button>
+                        <Button asChild>
+                          <Link
+                            href={`/tv/${id}/${seasonNumber}/${episode.episode_number}`}
+                          >
+                            Play
+                          </Link>
+                        </Button>
                       </div>
                       <p className="text-muted-foreground">
                         {episode.overview || "No overview available."}

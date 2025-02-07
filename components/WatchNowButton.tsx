@@ -7,9 +7,15 @@ import VideoPlayer from "./VideoPlayer";
 
 interface WatchNowButtonProps {
   id: string;
+  totalSeasons?: number;
+  episodesPerSeason?: Record<number, number>;
 }
 
-const WatchNowButton: React.FC<WatchNowButtonProps> = ({ id }) => {
+const WatchNowButton: React.FC<WatchNowButtonProps> = ({
+  id,
+  totalSeasons,
+  episodesPerSeason,
+}) => {
   const [isIframeVisible, setIsIframeVisible] = useState(false);
 
   const toggleIframe = () => {
@@ -23,7 +29,13 @@ const WatchNowButton: React.FC<WatchNowButtonProps> = ({ id }) => {
       </Button>
       {isIframeVisible && (
         <div className="container mx-auto mt-8">
-          <VideoPlayer type="tv" id={id} className="h-full w-full" />
+          <VideoPlayer
+            type="tv"
+            id={id}
+            className="h-full w-full"
+            totalSeasons={totalSeasons}
+            episodesPerSeason={episodesPerSeason}
+          />
         </div>
       )}
     </div>

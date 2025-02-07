@@ -27,15 +27,15 @@ function get2EmbedUrl(options: ProviderOptions): string {
     type = "movie",
     id,
     imdbId = "",
-    seasonNumber = "",
-    episodeNumber = "",
+    seasonNumber = "1", // Default to season 1
+    episodeNumber = "1", // Default to episode 1
   } = options;
 
   // Trim all string values
   const trimmedId = id.trim();
   const trimmedImdbId = imdbId.trim();
-  const trimmedSeasonNumber = seasonNumber.trim();
-  const trimmedEpisodeNumber = episodeNumber.trim();
+  const trimmedSeasonNumber = seasonNumber.trim() || "1";
+  const trimmedEpisodeNumber = episodeNumber.trim() || "1";
 
   const baseUrl = "https://www.2embed.cc";
 
@@ -45,18 +45,11 @@ function get2EmbedUrl(options: ProviderOptions): string {
       : `embed/${trimmedId}`;
     return `${baseUrl}/${embedType}`;
   } else {
-    if (trimmedSeasonNumber && trimmedEpisodeNumber) {
-      const embedType = trimmedImdbId
-        ? `embedtv/${trimmedImdbId}`
-        : `embedtv/${trimmedId}`;
-      return `${baseUrl}/${embedType}&s=${trimmedSeasonNumber}&e=${trimmedEpisodeNumber}`;
-    } else {
-      // Embed Complete TV Seasons
-      const embedType = trimmedImdbId
-        ? `embedtvfull/${trimmedImdbId}`
-        : `embedtvfull/${trimmedId}`;
-      return `${baseUrl}/${embedType}`;
-    }
+    // Always use embedtv endpoint with season and episode numbers for TV shows
+    const embedType = trimmedImdbId
+      ? `embedtv/${trimmedImdbId}`
+      : `embedtv/${trimmedId}`;
+    return `${baseUrl}/${embedType}&s=${trimmedSeasonNumber}&e=${trimmedEpisodeNumber}`;
   }
 }
 

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Link from "next/link";
 
-export const runtime = "edge";
+
 
 // Generate static params for all TV show pages at build time
 // export async function generateStaticParams() {
@@ -81,7 +81,21 @@ async function TvShowPage({ params }: { params: Promise<{ id: string }> }) {
       </div>
 
       <div className="container pl-24">
-        <WatchNowButton id={id} />
+        <WatchNowButton
+          id={id}
+          totalSeasons={
+            show.seasons.filter((season) => season.season_number > 0).length
+          }
+          episodesPerSeason={show.seasons
+            .filter((season) => season.season_number > 0)
+            .reduce(
+              (acc, season) => ({
+                ...acc,
+                [season.season_number]: season.episode_count,
+              }),
+              {} as Record<number, number>,
+            )}
+        />
       </div>
       {/* Seasons Section */}
       <div className="container mx-auto px-8 py-12">
