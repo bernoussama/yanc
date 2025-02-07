@@ -16,14 +16,14 @@ import { Button } from "./ui/button";
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { searchMulti } from "@/lib/tmdb";
+import { searchMulti, SearchResult } from "@/lib/tmdb";
 import { getImageUrl } from "@/lib/utils";
 
 export function MainNav() {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
-  const [results, setResults] = React.useState<any[]>([]);
+  const [results, setResults] = React.useState<SearchResult[]>([]);
   const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function MainNav() {
       router.push(`/search?q=${encodeURIComponent(query)}`);
     }
   };
-  const handleSelect = (result: any) => {
+  const handleSelect = (result: SearchResult) => {
     setOpen(false);
     setQuery("");
     const path = result.media_type === "movie" ? "/movie" : "/tv";
@@ -59,7 +59,7 @@ export function MainNav() {
       <div className="container flex h-16 items-center justify-center px-4 overflow-visible">
         <Link href="/" className="flex items-center mr-6 gap-1">
           <Film className="h-6 w-6" />
-          <span className="font-bold text-xl">MovieFlix</span>
+          <span className="font-bold text-xl">NextFlix</span>
         </Link>
         <div className=" flex items-center justify-between w-full overflow-visible">
           <NavigationMenu>
