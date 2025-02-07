@@ -80,28 +80,3 @@ function TvShowSection({ title, shows }: { title: string; shows: TvShow[] }) {
     </div>
   );
 }
-
-function TvShowCard({ show }: { show: TvShow }) {
-  return (
-    <Link href={`/tv/${show.id}`} className="relative group block">
-      <div className="w-[200px] h-[300px] relative rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-105">
-        <Image
-          src={getImageUrl(show.poster_path)!}
-          alt={show.name}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-        <div className="space-y-1">
-          <h3 className="text-white font-medium">{show.name}</h3>
-          <p className="text-sm text-white/70">
-            {new Date(show.first_air_date).getFullYear()}
-            {" • "}
-            {show.vote_average.toFixed(1)} ★
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-}
