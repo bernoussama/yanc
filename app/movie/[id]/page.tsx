@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { Button } from "@/components/ui/button";
 import VideoPlayer from "@/components/VideoPlayer";
 import { getMovieById } from "@/lib/tmdb";

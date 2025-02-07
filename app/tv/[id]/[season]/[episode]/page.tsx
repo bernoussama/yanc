@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import VideoPlayer from "@/components/VideoPlayer";
 import { getTvShowById } from "@/lib/tmdb";
 import { notFound } from "next/navigation";

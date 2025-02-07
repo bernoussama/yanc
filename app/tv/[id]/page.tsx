@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getTvShowById } from "@/lib/tmdb";
 import { getImageUrl } from "@/lib/utils";
 import { Calendar, Star, Tv } from "lucide-react";
@@ -5,8 +7,6 @@ import WatchNowButton from "@/components/WatchNowButton";
 import Image from "next/image";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Link from "next/link";
-
-
 
 // Generate static params for all TV show pages at build time
 // export async function generateStaticParams() {
