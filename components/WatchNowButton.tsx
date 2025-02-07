@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PlayCircle } from "lucide-react";
+import VideoPlayer from "./VideoPlayer";
 
 interface WatchNowButtonProps {
   id: string;
@@ -22,11 +23,7 @@ const WatchNowButton: React.FC<WatchNowButtonProps> = ({ id }) => {
       </Button>
       {isIframeVisible && (
         <div className="container mx-auto mt-8">
-          <iframe
-            src={`https://vidsrc.xyz/embed/tv/${id}`}
-            allowFullScreen
-            className="rounded-lg border-0 w-full h-full aspect-[21/9]"
-          ></iframe>
+          <VideoPlayer type="tv" id={id} className="h-full w-full" />
         </div>
       )}
     </div>

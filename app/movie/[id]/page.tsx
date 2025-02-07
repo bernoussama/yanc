@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import VideoPlayer from "@/components/VideoPlayer";
 import { getMovieById } from "@/lib/tmdb";
 import { getImageUrl } from "@/lib/utils";
 import { Clock, Calendar, Star, PlayCircle } from "lucide-react";
@@ -87,11 +88,11 @@ async function MoviePage({ params }: { params: Promise<{ id: string }> }) {
       </div>
 
       <div className="container mx-auto mt-8 h-auto w-full">
-        <iframe
-          src={`https://vidsrc.to/embed/movie/${movie.id}`}
-          allowFullScreen
-          className="rounded-lg border-0 w-full h-full aspect-[21/9]"
-        ></iframe>
+        <VideoPlayer
+          type="movie"
+          id={movie.id.toString()}
+          className="h-full w-full"
+        />
       </div>
     </main>
   );
