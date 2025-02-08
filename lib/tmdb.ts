@@ -78,7 +78,7 @@ async function fetchFromTMDB<T>(
     });
 
     const response = await fetch(`${TMDB_BASE_URL}${endpoint}?${params}`, {
-      // next: { revalidate: 3600 },
+      ...(process.env.DOCKER ? { next: { revalidate: 3600 } } : {}),
     });
     console.log(response.status);
 
