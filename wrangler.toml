@@ -18,3 +18,8 @@ mode = "smart"
 # https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
 [vars]
 NODE_VERSION = ">=21.1.0"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "prod-d1-nextflix"
+database_id = "5c5f2e57-1235-48e6-941e-54233268601d"
